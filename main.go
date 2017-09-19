@@ -1,7 +1,16 @@
 package main
 
+import (
+	"log"
+	"net/http"
+)
+
 func main() {
 	NewBattle()
+
+	router := http.ServeMux{}
+	router.Handle("/", http.FileServer(http.Dir("./templates")))
+	log.Fatal(http.ListenAndServe(":5000", &router))
 }
 
 type Player struct {
@@ -43,7 +52,7 @@ func NewBattle() {
 		"Egor",
 		2,
 		Pet{
-			"Pikachu",
+			"Caterpie",
 			1,
 			30,
 			Characteristics{
